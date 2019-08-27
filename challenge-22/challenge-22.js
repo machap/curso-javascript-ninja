@@ -44,7 +44,10 @@
   */
   
   function sum() {
-    
+    console.log( arguments);
+    return Array.prototype.reduce.call(arguments, function(accumulatedItem, actualItem) {
+      return Number(accumulatedItem) + Number(actualItem);
+    });
   }
 
   /*
@@ -52,41 +55,50 @@
   diferentes, com quantidades variáveis de parâmetros passados.
   */
   console.log( '\nSomar alguns números:' );
-  // ?
+  console.log(sum(1, 2, 3));
+  console.log(sum(10, 20, 30));
+  console.log(sum(100, 200, 300));
 
   /*
   Declare uma variável chamada `userEntry`, que irá receber alguns valores
   entrados pelo usuário. Mostre para o usuário a seguinte frase:
   "Entre com alguns números que serão somados:"
   */
-  // ?
+  var userEntry = prompt('Entre com alguns números que serão somados:');
 
   /*
   Mostre no console o valor entrado pelo usuário:
   */
   console.log( '\nEntrada do usuário:' );
-  // ?
+  console.log( userEntry );
 
   /*
   Crie uma função chamada `justNumbers`, que recebe por parâmetro uma string
   e remove tudo o que não for número, retornando um array somente com os números
   da string. Mostre a representação em string dessa função no console.
   */
-  console.log( '\nFunção que limpa entrada do usuário (somente números):' );
-  // ?
+  
+  function justNumbers(entry) {
+    return entry.replace(/\D+/g, ',').split(',');
+  }
 
+  console.log( '\nFunção que limpa entrada do usuário (somente números):' );
+  console.log(justNumbers(userEntry));
+  
   /*
   Usando a função acima, faça a limpeza dos valores entrados pelo usuário,
   atribuindo o resultado à uma variável `numbers`.
   */
   console.log( '\nEntrada do usuário limpa. Somente números:' );
-  // ?
-
+  
+  var numbers = justNumbers(userEntry);
+  console.log(numbers);
   /*
   Agora com o array de números, utilize a função `sum` para somar todos os
   números desse array e mostre o resultado no console.
   */
   console.log( '\nSomar números entrados pelo usuário:' );
-  // ?
+  
+  console.log(sum.apply(sum, numbers));
 
 })()
